@@ -32,8 +32,8 @@ const styles = StyleSheet.create({
         width: 200
     },
     background: {
-        height: 740,
-        width: 360
+        height: 880,
+        width: 440
     }
 })
 
