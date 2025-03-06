@@ -26,8 +26,6 @@ const styles = StyleSheet.create({
 
   input: {
     height: 40,
-    borderColor: 'white',
-    borderWidth: 1,
     backgroundColor: "white",
     opacity: 0.8,
     marginBottom: 15,
