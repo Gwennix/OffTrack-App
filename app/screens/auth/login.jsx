@@ -43,7 +43,8 @@ export default function login() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: "center",
+    justifyContent: "flex-end",
+    paddingBottom: 25,
   },
 
   input: {
