@@ -1,5 +1,5 @@
 import './styles/global.css';
-import { Text, View, Button, StyleSheet, ImageBackground } from 'react-native';
+import { Text, View, Pressable, StyleSheet, ImageBackground } from 'react-native';
 import { useRouter } from "expo-router";
 
 
@@ -13,9 +13,13 @@ return (
     <Text style={styles.title}>{'Explore a \nnew world \nwith us'}
 </Text>
     
-    <Button color="black" title="register" onPress={() => router.push("/screens/auth/register") }/>
-    <Button color="black" title="login" onPress={() => router.push("/screens/auth/login") }/>
-    <Button color="black" title="Ga baar de app" onPress={() => router.replace("/screens/tabs/home") }/>
+<Pressable style={styles.start} onPress={() => router.push("/screens/auth/register")}>
+<Text style={styles.startText}>Register</Text>
+</Pressable>
+
+<Pressable style={styles.start} onPress={() => router.push("/screens/auth/login")}>
+<Text style={styles.startText}>Login</Text>
+</Pressable>
 
 </View>
 </ImageBackground>
@@ -25,14 +29,33 @@ return (
 
 const styles = StyleSheet.create({
     title:{
-        fontSize: 24,
+        flex: 1,
+        alignSelf: "flex-start",
+        fontSize: 48,
+        marginHorizontal: 20,
+        marginTop: 300,
         color: "white"
     },
 
     container: {
         flex: 1,
-        justifyContent: "center",
+        justifyContent: "flex-end",
         alignItems: "center"
+    },
+
+    start: {
+        height: 40,
+        width: "80%",
+        backgroundColor: "black",
+        justifyContent: "center",
+        alignItems: "center",
+        marginBottom: 15,
+        borderRadius: 5,
+      },
+
+    startText: {
+        color: "white",
+        fontSize: 16,
     },
 
     background: {
