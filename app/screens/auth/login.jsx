@@ -23,7 +23,7 @@ export default function login() {
               setLoginError("Login details required.");
             } else {
               setLoginError(null);
-              router.replace("/screens/tabs/home");
+              router.push("/screens/tabs/home");
             }
           }}
         />
