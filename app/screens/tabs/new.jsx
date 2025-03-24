@@ -67,6 +67,7 @@ export default function NewScreen() {
         </TouchableOpacity>
 
         <Text style={styles.label}>Duration</Text>
+        
         <TextInput
           style={styles.input}
           placeholder="Enter duration"
@@ -159,7 +160,7 @@ const styles = StyleSheet.create({
     fontSize: 40,
     color: "#aaa",
   },
-  
+
   buttonText: {
     color: "white",
     fontWeight: "bold",
