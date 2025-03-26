@@ -44,7 +44,7 @@ export default function NewScreen() {
         <TextInput
           style={styles.input}
           placeholder="Enter location"
-          value={formData.location}
+          value={diaryEntry.location}
           onChangeText={(text) => handleInputChange("location", text)}
         />
 
@@ -67,7 +67,7 @@ export default function NewScreen() {
         </TouchableOpacity>
 
         <Text style={styles.label}>Duration</Text>
-        
+
         <TextInput
           style={styles.input}
           placeholder="Enter duration"
