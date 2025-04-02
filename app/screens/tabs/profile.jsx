@@ -1,10 +1,12 @@
-import { StyleSheet, Text, View } from 'react-native'
-import React from 'react'
+import React from 'react';
+import { StyleSheet, Text, View, Image, ScrollView, Pressable } from 'react-native';
 
 export default function ProfileScreen() {
   return (
-    <View>
+    <View style={styles.container}>
+      <Image style={styles.banner} source={require('../../../app/images/enterprise.png')} />
       <Text>My Trips</Text>
+      
     </View>
   )
 }
@@ -12,7 +14,12 @@ export default function ProfileScreen() {
 const styles = StyleSheet.create({
     container: {
       flex: 1,
-      justifyContent: "center",
+      justifyContent: "flex-end",
       alignItems: "center"
+    },
+
+    banner: {
+      resizeMode: "contain",
+      width: "100%",
     }
 })

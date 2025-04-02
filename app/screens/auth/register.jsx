@@ -1,14 +1,23 @@
 import { Text, View, Button, StyleSheet, ImageBackground, TextInput } from 'react-native';
 import { useRouter } from "expo-router";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 export default function Register() {
   const router = useRouter();
-
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [loginError, setLoginError] = useState(null);
+
+  const saveData = async (user) => {
+    try {
+      await AsyncStorage.setItem('user', user);
+      alert('Opgeslagen!');
+    } catch (error) {
+      console.error('Fout bij ophalen', error);
+    }
+  };
 
   return (
     <ImageBackground source={require('../../../app/images/RegisterScreen.png')} style={styles.background}>
@@ -24,9 +33,11 @@ export default function Register() {
               setLoginError("Passwords do not match.");
             } else {
               setLoginError(null);
-              router.replace("/screens/tabs/home");
+              saveData();
+              router.replace("/screens/tabs/Home");
             }
           }} 
+          
         />
          
          {!!loginError && (

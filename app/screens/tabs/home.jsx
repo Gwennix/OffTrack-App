@@ -1,28 +1,34 @@
-import { StyleSheet, Text, View, Image, ScrollView, Pressable, FlatList } from 'react-native'
-import data from '../../data'
-import Details from '../components/details';
+import {
+  FlatList,
+  Image,
+  Pressable,
+  ScrollView,
+  StyleSheet,
+  Text,
+  View,
+} from 'react-native';
+import data from '../../data';
+import Details from '../components/Details';
 
 export default function Home() {
   return (
     <View style={styles.container}>
-
-      <FlatList 
+      <FlatList
         data={data}
-        keyExtractor={item => item.id}
-        renderItem={({item}) => (
-          <Details title={item.title}></Details>
+        keyExtractor={(item) => item.id}
+        renderItem={({ item }) => (
+          <Details trip={item}></Details> //hier alleen maar item meegeven een trip. Title was een beetje verwarrend.
         )}
       />
-      
     </View>
-  )
+  );
 }
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: "center",
-    alignItems: "center"
+    justifyContent: 'center',
+    alignItems: 'center',
   },
 
   thumbnail: {
@@ -44,5 +50,4 @@ const styles = StyleSheet.create({
     marginBottom: 15,
     fontSize: 12,
   },
-  
-})
+});

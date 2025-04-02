@@ -1,55 +1,52 @@
-import React from 'react';
-import { StyleSheet, Text, View, Image, ScrollView, Pressable } from 'react-native';
 import { useRouter } from 'expo-router';
+import React from 'react';
+import {
+  Image,
+  Pressable,
+  ScrollView,
+  StyleSheet,
+  Text,
+  View,
+} from 'react-native';
 import data from '../../data';
 
-const Details = ({ title }) => {
+const Details = ({ trip }) => {
   const router = useRouter();
 
-  //detailspage
-  const navigateTodetailspage = (id, city) => {
-    router.push(`/screens/detailspage?id=${id}&name=${city}`);
+  const navigateTodetailspage = () => {
+    router.push(`/screens/detailspage?id=${trip.id}&name=${trip.name}`);
   };
 
-
-  //Homepage
   return (
-      <ScrollView style={styles.scrollView}>
-        <Text style={styles.text}>🏖️ My Trips</Text>
-
-        {data.map((trip, index) => (
-          <View key={index}>
-            <Pressable onPress={() => navigateTodetailspage(trip.id, trip.name)}>
-              <Image style={styles.thumbnail} source={trip.img} />
-            </Pressable>
-            <Text style={styles.date}>{trip.date}</Text>
-          </View>
-        ))}
-      </ScrollView>
+    <View>
+      <Pressable onPress={navigateTodetailspage}>
+        <Image style={styles.thumbnail} source={trip.img} />
+      </Pressable>
+      <Text style={styles.date}>{trip.date}</Text>
+    </View>
   );
 };
 
 const styles = StyleSheet.create({
-    thumbnail: {
-        width: 410,
-        height: 200,
-        borderRadius: 10,
-        resizeMode: 'cover',
-        margin: 5,
-      },
-    
-      text: {
-        fontSize: 32,
-        fontWeight: 'bold',
-      },
-    
-      date: {
-        marginLeft: 5,
-        color: 'grey',
-        marginBottom: 15,
-        fontSize: 12,
-      },
-      
-})
+  thumbnail: {
+    width: 410,
+    height: 200,
+    borderRadius: 10,
+    resizeMode: 'cover',
+    margin: 5,
+  },
+
+  text: {
+    fontSize: 32,
+    fontWeight: 'bold',
+  },
+
+  date: {
+    marginLeft: 5,
+    color: 'grey',
+    marginBottom: 15,
+    fontSize: 12,
+  },
+});
 
 export default Details;

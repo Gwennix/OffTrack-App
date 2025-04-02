@@ -1,6 +1,7 @@
 import { Text, View, Button, StyleSheet, ImageBackground, TextInput } from 'react-native';
 import { useRouter } from "expo-router";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 export default function login() {
   const router = useRouter();
@@ -8,6 +9,22 @@ export default function login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [loginError, setLoginError] = useState(null);
+
+  useEffect(() => {
+    getData();
+  }, []);
+
+  const getData = async (user) => {
+    try{
+        const storedUser = await AsyncStorage.getItem('user', user);
+        if(storedUser){
+            setName(storedUser)
+        }
+    }
+    catch(error){
+        console.error('Fout bij ophalen', error)
+    }
+}
 
   return (
     <ImageBackground source={require('../../../app/images/LoginScreen.png')} style={styles.background}>
@@ -23,7 +40,7 @@ export default function login() {
               setLoginError("Login details required.");
             } else {
               setLoginError(null);
-              router.push("/screens/tabs/home");
+              router.push("/screens/tabs/Home");
             }
           }}
         />
