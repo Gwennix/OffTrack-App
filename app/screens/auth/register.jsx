@@ -1,6 +1,6 @@
 import { Text, View, Button, StyleSheet, ImageBackground, TextInput } from 'react-native';
 import { useRouter } from "expo-router";
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 export default function Register() {
@@ -10,7 +10,7 @@ export default function Register() {
   const [confirmPassword, setConfirmPassword] = useState("");
   const [loginError, setLoginError] = useState(null);
 
-  const saveData = async (user) => {
+  const userData = async (user) => {
     try {
       await AsyncStorage.setItem('user', user);
       alert('Opgeslagen!');
@@ -43,7 +43,7 @@ export default function Register() {
               setLoginError("Passwords do not match.");
             } else {
               setLoginError(null);
-              saveData(email);
+              userData(email);
               passData(password);
               router.replace("/screens/auth/login");
             }

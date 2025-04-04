@@ -1,23 +1,40 @@
-import {
-  FlatList,
-  Image,
-  Pressable,
-  ScrollView,
-  StyleSheet,
-  Text,
-  View,
-} from 'react-native';
+import {FlatList, Text, StyleSheet, View,} from 'react-native';
 import data from '../../data';
 import Details from '../components/Details';
+import React, { useState, useEffect } from "react";
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 export default function Home() {
+
+  const [username, setUsername] = useState('');
+
+  useEffect(() => {
+    const fetchUsername = async () => {
+      try { 
+        const storedUser = await AsyncStorage.getItem('user');
+
+        if (storedUser) {
+          setUsername(storedUser);
+        }
+
+      } catch (e) {
+        console.error("Kan gebruiker niet vinden", e);
+      }
+    };
+
+    fetchUsername();
+  }, []);
+
   return (
     <View style={styles.container}>
+
+     {username ? ( <Text style={styles.username}>Welcome, {username}!</Text>  ) : ( <Text style={styles.username}>...</Text> )}
+
       <FlatList
         data={data}
         keyExtractor={(item) => item.id}
         renderItem={({ item }) => (
-          <Details trip={item}></Details> //hier alleen maar item meegeven een trip. Title was een beetje verwarrend.
+          <Details trip={item}></Details>
         )}
       />
     </View>

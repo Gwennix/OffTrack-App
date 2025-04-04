@@ -1,14 +1,6 @@
 import { useRouter } from 'expo-router';
 import React from 'react';
-import {
-  Image,
-  Pressable,
-  ScrollView,
-  StyleSheet,
-  Text,
-  View,
-} from 'react-native';
-import data from '../../data';
+import {Image, Pressable, StyleSheet, Text, View} from 'react-native';
 
 const Details = ({ trip }) => {
   const router = useRouter();
