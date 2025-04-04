@@ -1,52 +1,62 @@
-import { Text, View, Button, StyleSheet, ImageBackground, TextInput } from 'react-native';
+import { Text, View, Button, ImageBackground, StyleSheet, TextInput } from 'react-native';
 import { useRouter } from "expo-router";
 import React, { useState, useEffect } from "react";
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
-export default function login() {
+export default function Login() {
   const router = useRouter();
-  
+
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [loginError, setLoginError] = useState(null);
 
-  useEffect(() => {
-    getData();
-  }, []);
-
-  const getData = async (user) => {
-    try{
-        const storedUser = await AsyncStorage.getItem('user', user);
-        if(storedUser){
-            setName(storedUser)
-        }
-    }
-    catch(error){
-        console.error('Fout bij ophalen', error)
-    }
-}
-
   return (
     <ImageBackground source={require('../../../app/images/LoginScreen.png')} style={styles.background}>
       <View style={styles.container}>
-
-        <TextInput style={styles.input} placeholder="Email Address" placeholderTextColor="black" value={email} onChangeText={setEmail} />
-        <TextInput style={styles.input} placeholder="Password" placeholderTextColor="black" secureTextEntry={true} value={password} onChangeText={setPassword} />
+        <TextInput
+          style={styles.input}
+          placeholder="Email Address"
+          placeholderTextColor="black"
+          value={email}
+          onChangeText={setEmail}
+        />
+        <TextInput
+          style={styles.input}
+          placeholder="Password"
+          placeholderTextColor="black"
+          secureTextEntry={true}
+          value={password}
+          onChangeText={setPassword}
+        />
 
         <Button
-          color="black" title="LOGIN"
-          onPress={() => {
+          color="black"
+          title="LOGIN"
+          onPress={async () => {
             if (email.trim() === "" || password.trim() === "") {
               setLoginError("Login details required.");
             } else {
-              setLoginError(null);
-              router.push("/screens/tabs/Home");
+              const storedEmail = await AsyncStorage.getItem('user');
+              const storedPassword = await AsyncStorage.getItem('password');
+          
+              if (!storedEmail || !storedPassword) {
+                setLoginError("No registered user found.");
+                return;
+              }
+          
+              if (email === storedEmail && password === storedPassword) {
+                setLoginError(null);
+                router.push("/screens/tabs/Home");    
+              } else {
+                setLoginError("Incorrect email or password.");
+              }
             }
           }}
+          
         />
 
         {!!loginError && (
-          <Text style={{ color: "red" }}>{loginError}</Text>
+          <Text style={{ color: "red", marginTop: 10 }}>{loginError}</Text>
         )}
 
         <Text style={styles.text} onPress={() => router.replace("/screens/auth/register")}>

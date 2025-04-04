@@ -19,6 +19,16 @@ export default function Register() {
     }
   };
 
+  const passData = async (password) => {
+    try {
+      await AsyncStorage.setItem('password', password);
+      alert('Opgeslagen!');
+    } catch (error) {
+      console.error('Fout bij ophalen', error);
+    }
+  };
+
+
   return (
     <ImageBackground source={require('../../../app/images/RegisterScreen.png')} style={styles.background}>
       <View style={styles.container}>
@@ -33,7 +43,8 @@ export default function Register() {
               setLoginError("Passwords do not match.");
             } else {
               setLoginError(null);
-              saveData();
+              saveData(email);
+              passData(password);
               router.replace("/screens/tabs/Home");
             }
           }} 
