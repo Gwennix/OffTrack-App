@@ -45,7 +45,7 @@ export default function Register() {
               setLoginError(null);
               saveData(email);
               passData(password);
-              router.replace("/screens/tabs/Home");
+              router.replace("/screens/auth/login");
             }
           }} 
           
