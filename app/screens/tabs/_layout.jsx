@@ -6,7 +6,7 @@ export default function TabsLayout() {
     
    <Tabs screenOptions={{headerShown: false}}>
 
-    <Tabs.Screen name="home" options={{title: "Home", tabBarIcon: () => (
+    <Tabs.Screen name="Home" options={{title: "Home", tabBarIcon: () => (
     <Ionicons name='home-outline' size={24} />
   )}} />
 
