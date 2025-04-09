@@ -14,7 +14,7 @@ export default function ProfileScreen() {
       <Text style={styles.info}>Gwen is a travel enthusiast with a deep passion for planes and aviation. Whether she's exploring new destinations or watching aircraft take off, she’s always captivated by the thrill of the journey. From planning her next trip to learning about different airlines and airports, Gwen finds joy in every aspect of travel. For her, the sky is not the limit—it’s just the beginning!</Text>
       </View>
       <Text style={styles.favorites}>❤️ My Favorites</Text>
-      <FlatList
+      <FlatList style={styles.favoritesFlatlist}
         data={data}
         keyExtractor={(item) => item.id}
         renderItem={({ item }) => (
@@ -22,6 +22,7 @@ export default function ProfileScreen() {
           <Details trip={item}></Details>
           </View>
         )}
+        horizontal
       />
     </View>
   );
@@ -84,11 +85,19 @@ const styles = StyleSheet.create({
 
     favorites: {
       top: 60,
+      fontWeight: "bold",
     },
 
     item: {
       flex: 1,
       flexDirection: 'flow',
-    }
+      width: 200,
+      height: 100,
+    },
+
+    favoritesFlatlist: {
+      top: 70,
+      paddingHorizontal: 10,
+    },
 
 })
